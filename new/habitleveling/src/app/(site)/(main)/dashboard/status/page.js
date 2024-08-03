@@ -15,15 +15,33 @@ export default function DashboardPage() {
     const [loading, setLoading] = useState(true);
     const router = useRouter();
 
-    console.log(status, 'status');
-
     useEffect(() => {
         if (status === 'authenticated') {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch('/api/getUserData');
+                    if(response.ok) {
+                        const data = await response.json();
+        
+                        if (data) {
+                            setUserData(data);
+                        } else {
+                            router.push('/create');
+                        }
+                    } else {
+                        throw new Error('Failed to fetch user data');
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                } finally {
+                    setLoading(false);
+                }
+            }
             fetchUserData();
         } else if(status === 'unauthenticated'){
             router.push('/signin');
         }
-    }, [status]);
+    }, [status, router]);
 
     const fetchUserData = async () => {
         try {
@@ -54,6 +72,5 @@ export default function DashboardPage() {
         return null;
     }
 
-    console.log(userData, 'userData');
     return <DashboardStatus userData={userData} />;
 }

@@ -16,32 +16,31 @@ export default function DashboardHabitPage() {
 
     useEffect(() => {
         if (status === 'authenticated') {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch('/api/getUserData');
+                    if(response.ok) {
+                        const data = await response.json();
+        
+                        if (data) {
+                            setUserData(data);
+                        } else {
+                            router.push('/create');
+                        }
+                    } else {
+                        throw new Error('Failed to fetch user data');
+                    }
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                } finally {
+                    setLoading(false);
+                }
+            };
             fetchUserData();
         } else if(status === 'unauthenticated'){
             router.push('/signin');
         }
-    }, [status]);
-
-    const fetchUserData = async () => {
-        try {
-            const response = await fetch('/api/getUserData');
-            if(response.ok) {
-                const data = await response.json();
-
-                if (data) {
-                    setUserData(data);
-                } else {
-                    router.push('/create');
-                }
-            } else {
-                throw new Error('Failed to fetch user data');
-            }
-        } catch (error) {
-            console.error('Error fetching user data:', error);
-        } finally {
-            setLoading(false);
-        }
-    }
+    }, [status, router]);
 
     if (loading) {
         return <Loader />

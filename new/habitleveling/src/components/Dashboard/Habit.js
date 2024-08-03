@@ -6,14 +6,15 @@ import { useState, useEffect } from "react";
 const DashboardHabit = ({ userData }) => {
     const delay = 1000;
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
+    const [habits, setHabits] = useState(userData.HabitList);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setLoading(false);
         }, delay);
         return () => clearTimeout(timer);
-    }
-    , []);
+    }, []);
     
 
 
@@ -28,8 +29,6 @@ const DashboardHabit = ({ userData }) => {
         );
     }
 
-    const router = useRouter();
-    const [habits, setHabits] = useState(userData.HabitList);
 
 
     const handleCompleteHabit = async (habitId, isChecked) => {
@@ -143,7 +142,7 @@ const DashboardHabit = ({ userData }) => {
 
                                 {/* Habit List */}
                                 {habits && habits.length > 0 ? ((habits.map((habit) => (
-                                    <div className="flex flex-row card bg-indigo-800 px-2 h-20 border border-white">
+                                    <div className="flex flex-row card bg-indigo-800 px-2 h-20 border border-white" key={habit._id}>
                                         <label className="flex items-center justify-between h-full w-full">
                                             <span className="ml-2">{habit.Name}</span>
                                             <input
@@ -196,7 +195,7 @@ const DashboardHabit = ({ userData }) => {
 
                                     {/* Habit List */}
                                     {habits && habits.length > 0 ? ((habits.map((habit) => (
-                                        <div className="flex flex-row card bg-indigo-800 border border-white px-2 h-20">
+                                        <div className="flex flex-row card bg-indigo-800 border border-white px-2 h-20" key={habit._id}>
                                             <label className="flex items-center justify-between w-full">
                                                 <span className="ml-2">{habit.Name}</span>
                                                 <input

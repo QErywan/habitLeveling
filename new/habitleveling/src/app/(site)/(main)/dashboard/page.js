@@ -11,7 +11,7 @@ function DashboardPage() {
     const router = useRouter();
     useEffect(() => {
         router.push('/dashboard/habit');
-    }, []);
+    }, [router]);
 }
 
 export default DashboardPage;
