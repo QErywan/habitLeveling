@@ -31,3 +31,23 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Add this to your CSS file or inside a <style> tag */
+.custom-checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #9b59b6;
+  padding: 1rem;
+  border-radius: 8px;
+  color: white;
+  margin: 1rem 0;
+}
+
+.custom-checkbox.complete {
+  background-color: #8e44ad;
+}
+
+.custom-checkbox.incomplete {
+  background-color: #af7ac5;
+}

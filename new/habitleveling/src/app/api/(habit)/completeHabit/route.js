@@ -3,6 +3,8 @@ import UserData from "@/utils/dbModels/UserData";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/utils/auth";
+import { addHabitExperience } from "@/utils/addHabitExperience";
+import { removeHabitExperience } from "@/utils/removeHabitExperience";
 
 
 export async function POST(req, res) {
@@ -21,14 +23,16 @@ export async function POST(req, res) {
         if (status) {
             await UserData.findOneAndUpdate(
                 { UserId: session.user.id, HabitList: { $elemMatch: { _id: habitId } } },
-                { $set: { "HabitList.$.Status": true } }
+                { $set: { "HabitList.$.CompletedToday": true } }
             );
+            await addHabitExperience(session.user.id, habitId);
 
         } else {
             await UserData.findOneAndUpdate(
                 { UserId: session.user.id, HabitList: { $elemMatch: { _id: habitId } } },
-                { $set: { "HabitList.$.Status": false } }
+                { $set: { "HabitList.$.CompletedToday": false } }
             );
+            await removeHabitExperience(session.user.id, habitId);
         }
 
         return NextResponse.json("Habit completed", { status: 200 });

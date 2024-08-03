@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "stripe": "^16.5.0"
+  },
+  "devDependencies": {
+    "daisyui": "^4.12.10"
+  }
+}

@@ -4,7 +4,7 @@ import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Loader from '@/components/Common/Loader';
 
 
@@ -18,12 +18,24 @@ const SignIn = () => {
 
     const [isPassword, setIsPassword] = useState(false);
     const [loading, setIsLoading] = useState(false);
+    const [pageLoading, setPageLoading] = useState(true);
 
     const loginUserGoogle = async () => {
         const response = await signIn('google', {
-            callbackUrl: '/dashboard',
+            callbackUrl: '/dashboard/habit',
         })
     }
+
+    const delay = 1000;
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setPageLoading(false);
+        }, delay);
+
+        return () => clearTimeout(timer);
+    }, []);
+
 
 
     const loginUserCredentials = async (e) => {
@@ -55,8 +67,19 @@ const SignIn = () => {
         
     }
 
+    if (pageLoading) {
+        return (
+            <div className="bg-blue-950 text-white p-6 min-h-screen">
+                <div className="flex flex-col justify-center items-center h-screen">
+                    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
+                    <p>Getting login form</p>
+                </div>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex items-center justify-center h-screen bg-gray-100">
+        <div className="flex items-center justify-center h-screen bg-blue-950 px-5">
             <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-lg">
                 <div className="flex items-center justify-center">
                     <Image src="" alt="Logo" width={50} height={50} />
