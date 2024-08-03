@@ -53,8 +53,6 @@ export async function POST(req) {
                 let user;
                 let userLoginData;
 
-                console.log(customer.email);
-
                 if (customer.email) {
                     userLoginData = await UserLoginData.findOne({ EmailAddress: customer.email });
 

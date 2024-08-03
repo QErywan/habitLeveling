@@ -3,6 +3,9 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
+import { Bounce, ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const DashboardHabit = ({ userData }) => {
     const delay = 1000;
     const [loading, setLoading] = useState(true);
@@ -47,6 +50,11 @@ const DashboardHabit = ({ userData }) => {
             },
             body: JSON.stringify({ habitId, status: isChecked }),
         });
+
+        if (response.status == '429') {
+            showToast("Too many requests.!");
+        }
+
     
         if (!response.ok) {
             console.log("Error completing habit");
@@ -57,6 +65,10 @@ const DashboardHabit = ({ userData }) => {
                 )
             );
         }
+    }
+
+    function showToast(message) {
+        toast(message);
     }
 
     const addHabit = () => {
@@ -225,6 +237,19 @@ const DashboardHabit = ({ userData }) => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Bounce}
+            />
         </div>
     );
 }

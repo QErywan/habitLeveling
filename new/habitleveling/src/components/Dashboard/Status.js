@@ -3,6 +3,8 @@ import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 const DashboardStatus = ({ userData }) => {
+
+    console.log(userData, 'userData');
     const [availablePoints, setAvailablePoints] = useState(userData.Points);
     const [stats, setStats] = useState(userData?.Stats[0] || {});
     const router = useRouter();
@@ -27,15 +29,6 @@ const DashboardStatus = ({ userData }) => {
         'LUK': 'LUCK',
     }
 
-    if (!userData) {
-        return (
-            <div>
-                <h1>Dashboard</h1>
-                <p>Loading user data...</p>
-                <button onClick={() => signOut({callbackUrl: "/dashboard"})}>Sign Out</button>
-            </div>
-        );
-    }
 
     const { Username, JobTitle, Level, Experience } = userData;
 
