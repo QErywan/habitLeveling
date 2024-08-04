@@ -79,8 +79,9 @@ const DashboardStatus = ({ userData }) => {
     if (loading) {
         return (
             <div className="bg-blue-950 text-white p-6 min-h-screen">
-                <div className="flex justify-center items-center h-screen">
+                <div className="flex flex-col justify-center items-center h-screen">
                     <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white"></div>
+                    <p>Loading status window</p>
                 </div>
             </div>
         );
@@ -89,9 +90,7 @@ const DashboardStatus = ({ userData }) => {
     return (
         <div className="bg-blue-950 text-white p-6 min-h-screen mx-auto">
             {/* lg section */}
-            <div className='hidden lg:block'>
-                <div className="flex flex-row gap-4 h-screen max-h-[30rem]">
-
+            <div className='hidden lg:flex'>
                     {/* Sidebar lg */}
                     <div className="hidden lg:flex lg:w-44 card lg:justify-center lg:px-4">
                         <div className='flex flex-col gap-3'>
@@ -103,6 +102,8 @@ const DashboardStatus = ({ userData }) => {
                             <button className="btn btn-outline btn-md text-white" onClick={handleItemClick('logout')}>LOGOUT</button>
                         </div>
                     </div>
+                <div className="flex flex-row gap-4 h-screen max-h-[30rem] mx-auto">
+
                     
                     {/* Stats Area lg */}
                     <div className='hidden lg:max-w-[92rem] lg:mx-auto lg:flex'>

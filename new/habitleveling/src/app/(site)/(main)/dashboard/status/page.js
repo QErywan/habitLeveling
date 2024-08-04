@@ -4,7 +4,6 @@ import DashboardStatus from "@/components/Dashboard/Status";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import Loader from '@/components/Common/Loader';
 import { ToastContainer, toast } from "react-toastify";
 
 
@@ -58,22 +57,26 @@ export default function DashboardStatusPage() {
         }
     }, [status, router]);
 
-    if (loading) {
-        return <Loader />
+    if (loading || !userData) {
+        return (
+            <div className="bg-blue-950 text-white p-6 min-h-screen">
+                <div className="flex flex-col justify-center items-center h-screen">
+                    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
+                    <p>Loading status window</p>
+                </div>
+            </div>
+        );
     }
+    console.log(userData.freeTrial);
 
-    if (rateLimited) {
-        return <ToastContainer />
-    }
-
-    if (!userData) {
-        return null;
+    if (!userData.hasAccess && !userData.freeTrial) {
+        router.push('/pricing');
     }
 
     return (
         <>
-            <ToastContainer />
             <DashboardStatus userData={userData} />;
+            <ToastContainer />
         </>
     ) 
 }

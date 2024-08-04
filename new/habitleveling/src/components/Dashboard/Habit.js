@@ -116,12 +116,10 @@ const DashboardHabit = ({ userData }) => {
             <AddHabitButton /> */}
 
             {/* lg section */}
-            <div className="hidden lg:block">
-                <div className="flex flex-row gap-4 h-screen max-h-[30rem] ">
-
+            <div className="hidden lg:flex">
                     {/* Sidebar lg */}
-                    <div className="hidden lg:flex lg:w-44 card lg:justify-center lg:px-4">
-                        <div className='flex flex-col gap-3'>
+                    <div className="hidden lg:flex lg:w-44 card lg:justify-center lg:px-4 lg:static">
+                        <div className='flex flex-col gap-3 static'>
                             {/* <a href='/dashboard/habit'>HABIT</a>
                             <a href='/dashboard/status'>STATUS</a>
                             <a href='/dashboard/habit'>HABIT</a> */}
@@ -130,7 +128,7 @@ const DashboardHabit = ({ userData }) => {
                             <button className="btn btn-outline btn-md border-white text-white" onClick={handleItemClick('logout')}>LOGOUT</button>
                         </div>
                     </div>
-
+                <div className="flex flex-row gap-4 h-screen max-h-[30rem] mx-auto ">
                     {/* Habit lg */}
                     <div className="hidden lg:max-w-[92rem] lg:mx-auto lg:flex">
                         <div className="flex flex-col card bg-indigo-700 gap-0">

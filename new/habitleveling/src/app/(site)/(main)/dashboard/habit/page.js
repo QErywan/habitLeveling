@@ -12,6 +12,7 @@ export default function DashboardHabitPage() {
     const { data: session, status } = useSession();
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const delay = 1000;
     const router = useRouter();
 
     useEffect(() => {
@@ -38,6 +39,7 @@ export default function DashboardHabitPage() {
                     } else {
                         throw new Error('Failed to fetch user data: ' + response.statusText);
                     }
+
                 } catch (error) {
                     toast.error('Error fetching user data: ' + error.message);
                     const cachedUserData = localStorage.getItem('userData');
@@ -57,12 +59,30 @@ export default function DashboardHabitPage() {
         }
     }, [status, router]);
 
-    if (loading) {
-        return <Loader />;
-    }
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, delay);
+        return () => clearTimeout(timer);
+    }, []);
 
-    if (!userData) {
-        return null;
+    console.log(userData);
+
+    
+    if (loading || !userData) {
+        return (
+            <div className="bg-blue-950 text-white p-6 min-h-screen">
+                <div className="flex flex-col justify-center items-center h-screen">
+                    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
+                    <p>Loading Habits</p>
+                </div>
+            </div>
+        );
+    }
+    
+    // hasAccess authentication. To add free trial logic
+    if (!userData.hasAccess && !userData.freeTrial) {
+        router.push('/pricing');
     }
 
     return (

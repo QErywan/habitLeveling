@@ -16,5 +16,17 @@ export async function resetHabitsIfNeeded(userId) {
                 },
             }
         );
+
+        user.HabitList.forEach((habit) => {
+            if (habit.CompletedToday) {
+                habit.CompletedToday = false;
+            }
+        });
+
+        return user.HabitList
+
+        
     }
+
+    return user.HabitList
 }

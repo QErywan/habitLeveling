@@ -9,6 +9,7 @@ import UserLoginDataExternal from '@/utils/dbModels/UserLoginDataExternal';
 export const authOptions = {
     pages: {
         signIn: '/signin',
+        newUser: '/create',
     },
     providers: [
         CredentialProvider({
