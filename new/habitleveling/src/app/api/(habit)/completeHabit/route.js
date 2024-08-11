@@ -14,9 +14,6 @@ const ratelimit = new Ratelimit({
     limiter: Ratelimit.slidingWindow(50, "60 s"),
 });
 
-export const config = {
-    runtime: 'edge',
-}
 
 
 export async function POST(req, res) {

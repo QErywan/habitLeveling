@@ -66,41 +66,41 @@ const SignUp = () => {
     };
 
     return (
-        <section className="flex items-center justify-center h-screen bg-gray-100">
-            <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-lg">
+        <section className="flex items-center justify-center h-screen bg-base-100">
+            <div className="w-full max-w-md p-4 bg-neutral rounded-lg shadow-lg">
                 <div className="flex items-center justify-center">
                     <Image src="" alt="Logo" width={50} height={50} />
-                    <h1 className="text-3xl font-bold text-gray-800">Habit Leveling</h1>
+                    <h1 className="text-3xl font-bold text-neutral-content">Habit Leveling</h1>
                 </div>
                 <div className="mt-4">
                     <button
                         type="button"
                         onClick={loginUserGoogle}
-                        className="w-full px-3 py-2 text-sm font-medium text-white bg-blue-500 rounded-md"
+                        className="w-full px-3 py-2 text-sm font-medium text-white bg-red-500 rounded-md"
                     >
                         Sign Up with Google
                     </button>
                 </div>
                 <form onSubmit={handleSubmit} className="mt-4">
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-neutral-content">Email</label>
                         <input
                             type="email"
                             name="email"
                             id="email"
-                            className="w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-md text-stone-950"
+                            className="w-full px-3 py-2 mt-1 text-sm border border-neutral-content rounded-md text-neutral-content"
                             placeholder="Email"
                             onChange={handleChange}
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium text-neutral-content">Password</label>
                         <input
                             type={isPassword ? "text" : "password"}
                             name="password"
                             id="password"
-                            className="w-full px-3 py-2 mt-1 text-sm border border-gray-300 rounded-md text-stone-950"
+                            className="w-full px-3 py-2 mt-1 text-sm border border-neutal-content rounded-md text-neutral-content"
                             placeholder="Password"
                             onChange={handleChange}
                             required
@@ -108,7 +108,7 @@ const SignUp = () => {
                         <button
                             type="button"
                             onClick={() => setIsPassword(!isPassword)}
-                            className="text-sm text-gray-600 hover:text-gray-500"
+                            className="text-sm text-neutral-content hover:text-gray-500"
                         >
                             {isPassword ? "Hide" : "Show"}
                         </button>
@@ -122,7 +122,7 @@ const SignUp = () => {
                         </button>
                     </div>
                     <div className="text-center">
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-neutral-content ">
                             Already have an account?{" "}
                             <Link href="/signin" className="text-blue-500">Sign In</Link>
                         </p>

@@ -100,7 +100,7 @@ const DashboardHabit = ({ userData }) => {
 
     if (loading) {
         return (
-            <div className="bg-blue-950 text-white p-6 min-h-screen">
+            <div className="bg-neutral text-white p-6 min-h-screen">
                 <div className="flex flex-col justify-center items-center h-screen">
                     <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
                     <p>Loading Habits</p>
@@ -109,8 +109,8 @@ const DashboardHabit = ({ userData }) => {
         );
     }
 
-    return (
-        <div className="bg-blue-950 text-white p-6 min-h-screen">
+return (
+        <div className="bg-base-100 text-white p-6 min-h-screen">
             {/* <Sidebar />
             <Habit HabitList={userData.HabitList} />
             <AddHabitButton /> */}
@@ -131,7 +131,7 @@ const DashboardHabit = ({ userData }) => {
                 <div className="flex flex-row gap-4 h-screen max-h-[30rem] mx-auto ">
                     {/* Habit lg */}
                     <div className="hidden lg:max-w-[92rem] lg:mx-auto lg:flex">
-                        <div className="flex flex-col card bg-indigo-700 gap-0">
+                        <div className="flex flex-col card bg-neutral gap-0">
 
                             {/* Title */}
                             <div className="py-2 flex flex-row p-4">
@@ -140,7 +140,7 @@ const DashboardHabit = ({ userData }) => {
                                 </div>
                                 <button
                                     onClick={addHabit}
-                                    className="w-10 h-10 bg-indigo-800 rounded-md text-white text-4xl text-center mt-3 hover:bg-indigo-900 border boder-white"
+                                    className="w-10 h-10 bg-neutral rounded-md text-white text-4xl text-center mt-3 hover:bg-indigo-900 border boder-white"
                                 >
                                     +
                                 </button>
@@ -152,12 +152,12 @@ const DashboardHabit = ({ userData }) => {
 
                                 {/* Habit List */}
                                 {habits && habits.length > 0 ? ((habits.map((habit) => (
-                                    <div className="flex flex-row card bg-indigo-800 px-2 h-20 border border-white" key={habit._id}>
+                                    <div className="flex flex-row card bg-base-200 px-2 h-20 border border-white" key={habit._id}>
                                         <label className="flex items-center justify-between h-full w-full">
                                             <span className="ml-2">{habit.Name}</span>
                                             <input
                                                 type="checkbox"
-                                                className="form-checkbox checkbox checkbox-lg checkbox-primary"
+                                                className="form-checkbox checkbox checkbox-lg checkbox-neutral-content border-neutral-content"
                                                 onChange={(e) => handleCompleteHabit(habit._id, e.target.checked)}
                                                 checked={habit.CompletedToday}
                                             />
@@ -177,7 +177,7 @@ const DashboardHabit = ({ userData }) => {
             <div className='lg:hidden block'>
                 <div className="flex flex-col lg:flex-row lg:gap-4 lg:mt-4">
                     {/* Sidebar sm/md */}
-                    <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 pb-[calc(max(env(safe-area-inset-bottom),16px)-16px)] bg-indigo-700 border-t border-base-content/10 select-none">
+                    <div className="lg:hidden fixed inset-x-0 bottom-0 z-40 pb-[calc(max(env(safe-area-inset-bottom),16px)-16px)] bg-neutral border-t border-base-content/10 select-none">
                         <div className="flex justify-between">
                             <button className="btn btn-ghost" onClick={handleItemClick('habit')}>HABIT</button>
                             <button className="btn btn-ghost" onClick={handleItemClick('status')}>STATUS</button>
@@ -188,7 +188,7 @@ const DashboardHabit = ({ userData }) => {
                     {/* Stats Area sm/md */}
 
                     <div className='lg:hidden flex-auto'>
-                        <div className='flex-col card bg-indigo-700 gap-0 items-center'>
+                        <div className='flex-col card bg-neutral gap-0 items-center'>
 
                             {/* Title */}
                             <div className="flex py-2 ">
@@ -205,12 +205,12 @@ const DashboardHabit = ({ userData }) => {
 
                                     {/* Habit List */}
                                     {habits && habits.length > 0 ? ((habits.map((habit) => (
-                                        <div className="flex flex-row card bg-indigo-800 border border-white px-2 h-20" key={habit._id}>
+                                        <div className="flex flex-row card bg-base-200 border border-white px-2 h-20" key={habit._id}>
                                             <label className="flex items-center justify-between w-full">
                                                 <span className="ml-2">{habit.Name}</span>
                                                 <input
                                                     type="checkbox"
-                                                    className="form-checkbox checkbox checkbox-lg checkbox-primary"
+                                                    className="form-checkbox checkbox checkbox-lg checkbox-neutral-content border-neutral-content"
                                                     onChange={(e) => handleCompleteHabit(habit._id, e.target.checked)}
                                                     checked={habit.CompletedToday}
                                                 />
@@ -223,7 +223,7 @@ const DashboardHabit = ({ userData }) => {
                             </div>
                         </div>
 
-                        <div className="flex-col card bg-indigo-700 gap-0 items-center my-2">
+                        <div className="flex-col card bg-neutral gap-0 items-center my-2">
                             <button
                                 onClick={addHabit}
                                 className="h-10 w-full hover:bg-indigo-900  rounded-lg text-white text-xl text-center"

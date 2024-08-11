@@ -59,7 +59,7 @@ export default function DashboardStatusPage() {
 
     if (loading || !userData) {
         return (
-            <div className="bg-blue-950 text-white p-6 min-h-screen">
+            <div className="text-white p-6 min-h-screen">
                 <div className="flex flex-col justify-center items-center h-screen">
                     <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
                     <p>Loading status window</p>
@@ -75,7 +75,7 @@ export default function DashboardStatusPage() {
 
     return (
         <>
-            <DashboardStatus userData={userData} />;
+            <DashboardStatus userData={userData} />
             <ToastContainer />
         </>
     ) 

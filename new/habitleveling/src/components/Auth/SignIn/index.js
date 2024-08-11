@@ -69,7 +69,7 @@ const SignIn = () => {
 
     if (pageLoading) {
         return (
-            <div className="bg-blue-950 text-white p-6 min-h-screen">
+            <div className="bg-neutral text-white p-6 min-h-screen">
                 <div className="flex flex-col justify-center items-center h-screen">
                     <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
                     <p>Getting login form</p>
@@ -79,11 +79,11 @@ const SignIn = () => {
     }
 
     return (
-        <div className="flex items-center justify-center h-screen bg-blue-950 px-5">
-            <div className="w-full max-w-md p-4 bg-white rounded-lg shadow-lg">
+        <div className="flex items-center justify-center h-screen bg-base-100 px-5">
+            <div className="w-full max-w-md p-4 bg-neutral rounded-lg shadow-lg">
                 <div className="flex items-center justify-center">
                     <Image src="" alt="Logo" width={50} height={50} />
-                    <h1 className="text-3xl font-bold text-gray-800">Habit Leveling</h1>
+                    <h1 className="text-3xl font-bold text-neutral-content">Habit Leveling</h1>
                 </div>
                 <div className="mt-4">
                     <button
@@ -95,20 +95,20 @@ const SignIn = () => {
                 </div>
                 <form onSubmit={loginUserCredentials} className="mt-4">
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-neutral-content">Email</label>
                         <input
                             type="email"
                             id="email"
                             name="email"
                             value={loginData.email}
                             onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
-                            className="w-full px-3 py-2 mt-1 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:bg-white"
+                            className="w-full px-3 py-2 mt-1 text-neutral-content rounded-md border border-neutral-content focus:outline-none"
                             placeholder="Email"
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium text-neutral-content">Password</label>
                         <div className="relative">
                             <input
                                 type={isPassword ? 'text' : 'password'}
@@ -116,7 +116,7 @@ const SignIn = () => {
                                 name="password"
                                 value={loginData.password}
                                 onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
-                                className="w-full px-3 py-2 mt-1 text-gray-700 bg-gray-200 rounded-md focus:outline-none focus:bg-white"
+                                className="w-full px-3 py-2 mt-1 text-neutral-content border border-neutral-content rounded-md focus:outline-none "
                                 placeholder="Password"
                                 required
                             />
@@ -150,7 +150,7 @@ const SignIn = () => {
                         </Link>
                     </div>
                     <div>
-                        <p className="mt-4 text-center text-sm text-gray-600">
+                        <p className="mt-4 text-center text-sm text-neutral-content">
                             Don't have an account?{" "}
                             <Link href="/signup" className="text-blue-500">Sign Up</Link>
                         </p>

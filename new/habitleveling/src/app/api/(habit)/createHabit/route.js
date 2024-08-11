@@ -12,10 +12,6 @@ const ratelimit = new Ratelimit({
     limiter: Ratelimit.slidingWindow(10, "10 s"),
 });
 
-export const config = {
-    runtime: 'edge',
-}
-
 export async function POST(req, res) {
     const ip = req.ip || req.headers.get('x-forwarded-for') || '127.0.0.1';
     const endpoint = req.url;
