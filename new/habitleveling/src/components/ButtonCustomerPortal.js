@@ -9,24 +9,9 @@ const ButtonCustomerPortal = () => {
 
     if (status === "authenticated") {
         return (
-            // <div className="navbar bg-indigo-900">
-            //     <a
-            //         href={
-            //             customerPortalLink + 
-            //             "?prefilled_email=" +
-            //             session.user?.email
-            //         }
-            //         className="btn btn-primary"
-            //     >
-            //         Billing
-            //     </a>
-            // </div>
-            <div className="navbar bg-base-100">
-            <div className="flex-1">
-              <a className="btn btn-ghost text-xl">Habit Leveling ICON</a>
-            </div>
-            <div className="navbar-center">
-                
+            <div className="navbar bg-neutral">
+                <div className="flex-1">
+                <a className="btn btn-ghost text-xl">Habit Leveling ICON</a>
             </div>
             <div className="flex-none">
                 <ul class="menu menu-horizontal px-1">

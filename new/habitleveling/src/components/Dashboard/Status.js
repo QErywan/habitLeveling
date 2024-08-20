@@ -169,7 +169,7 @@ const DashboardStatus = ({ userData }) => {
                                             {availablePoints > 0 ? (
                                                 Object.entries(stats).map(([stat, value]) => (
                                                     <div key={stat} className="flex justify-between">
-                                                        <p><span>{statIcon[stat]}</span><span className='bold'>{fullStatName[stat]}</span>: <span className='font-bold'>{value}</span></p>
+                                                        <p><span className='bold'>{fullStatName[stat]}</span>: <span className='font-bold'>{value}</span></p>
                                                         <button onClick={() => handleIncrementStat(stat)} className="btn btn-outline btn-xs rounded-full border-white text-white hover:bg-white">
                                                             +
                                                         </button>
@@ -178,7 +178,7 @@ const DashboardStatus = ({ userData }) => {
                                             ) : (
                                                 Object.entries(stats).map(([stat, value]) => (
                                                     <div key={stat} className="flex justify-between">
-                                                    <p><span>{statIcon[stat]}</span><span className='bold'>{fullStatName[stat]}</span>: <span className='font-bold'>{value}</span></p>
+                                                    <p><span></span><span className='bold'>{fullStatName[stat]}</span>: <span className='font-bold'>{value}</span></p>
                                                     </div>
                                                 ))
                                             )}

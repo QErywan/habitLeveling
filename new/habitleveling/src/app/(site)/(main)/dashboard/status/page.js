@@ -59,7 +59,7 @@ export default function DashboardStatusPage() {
 
     if (loading || !userData) {
         return (
-            <div className="text-white p-6 min-h-screen">
+            <div className="text-white p-6 min-h-screen bg-neutral">
                 <div className="flex flex-col justify-center items-center h-screen">
                     <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
                     <p>Loading status window</p>
@@ -67,7 +67,6 @@ export default function DashboardStatusPage() {
             </div>
         );
     }
-    console.log(userData.freeTrial);
 
     if (!userData.hasAccess && !userData.freeTrial) {
         router.push('/pricing');
