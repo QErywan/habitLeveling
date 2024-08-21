@@ -7,18 +7,9 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const DashboardHabit = ({ userData }) => {
-    const delay = 1000;
-    const [loading, setLoading] = useState(true);
     const router = useRouter();
     const [habits, setHabits] = useState(userData.HabitList);
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, delay);
-        return () => clearTimeout(timer);
-    }, []);
-    
 
 
     if (!userData) {
@@ -96,17 +87,6 @@ const DashboardHabit = ({ userData }) => {
                 console.log("default");
                 break;
         }
-    }
-
-    if (loading) {
-        return (
-            <div className="bg-neutral text-white p-6 min-h-screen">
-                <div className="flex flex-col justify-center items-center h-screen">
-                    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
-                    <p>Loading Habits</p>
-                </div>
-            </div>
-        );
     }
 
 return (

@@ -9,17 +9,6 @@ const DashboardStatus = ({ userData }) => {
     const [stats, setStats] = useState(userData?.Stats[0] || {});
     const router = useRouter();
 
-    const delay = 1000;
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, delay);
-        return () => clearTimeout(timer);
-    }
-    , []);
-
     const fullStatName = {
         'STR': 'STRENGTH',
         'AGI': 'AGILITY',
@@ -84,17 +73,6 @@ const DashboardStatus = ({ userData }) => {
                 console.log("default");
                 break;
         }
-    }
-
-    if (loading) {
-        return (
-            <div className="text-white p-6 min-h-screen">
-                <div className="flex flex-col justify-center items-center h-screen">
-                    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white"></div>
-                    <p>Loading status window</p>
-                </div>
-            </div>
-        );
     }
 
     return (
@@ -258,7 +236,7 @@ const DashboardStatus = ({ userData }) => {
                                             {availablePoints > 0 ? (
                                                 Object.entries(stats).map(([stat, value]) => (
                                                     <div key={stat} className="flex justify-between">
-                                                        <p>{statIcon[stat]}<span className='bold'>{stat}</span>: <span className='font-bold'>{value}</span></p>
+                                                        <p><span className='bold'>{stat}</span>: <span className='font-bold'>{value}</span></p>
                                                         <button onClick={() => handleIncrementStat(stat)} className="btn btn-outline btn-xs rounded-full border-white text-white hover:bg-white">
                                                             +
                                                         </button>
@@ -267,7 +245,7 @@ const DashboardStatus = ({ userData }) => {
                                             ) : (
                                                 Object.entries(stats).map(([stat, value]) => (
                                                     <div key={stat} className="flex justify-between">
-                                                    <p>{statIcon[stat]}<span className='bold'>{stat}</span>: <span className='font-bold'>{value}</span></p>
+                                                    <p><span className='bold'>{stat}</span>: <span className='font-bold'>{value}</span></p>
                                                     </div>
                                                 ))
                                             )}

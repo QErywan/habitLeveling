@@ -17,7 +17,6 @@ const SignIn = () => {
     });
 
     const [isPassword, setIsPassword] = useState(false);
-    const [loading, setIsLoading] = useState(false);
     const [pageLoading, setPageLoading] = useState(true);
 
     const loginUserGoogle = async () => {
@@ -25,17 +24,6 @@ const SignIn = () => {
             callbackUrl: '/dashboard/habit',
         })
     }
-
-    const delay = 1000;
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setPageLoading(false);
-        }, delay);
-
-        return () => clearTimeout(timer);
-    }, []);
-
 
 
     const loginUserCredentials = async (e) => {
@@ -51,7 +39,6 @@ const SignIn = () => {
         .then((callback) => {
             if (callback.error) {
                 console.log(callback.error);
-                setIsLoading(false);
                 return;
             }
             console.log(callback);
@@ -61,7 +48,6 @@ const SignIn = () => {
             }
         })
         .catch((error) => {
-            setIsLoading(false);
             console.log(error);
         });
         
