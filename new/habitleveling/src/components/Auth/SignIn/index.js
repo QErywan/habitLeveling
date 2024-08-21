@@ -17,7 +17,6 @@ const SignIn = () => {
     });
 
     const [isPassword, setIsPassword] = useState(false);
-    const [pageLoading, setPageLoading] = useState(true);
 
     const loginUserGoogle = async () => {
         const response = await signIn('google', {
@@ -39,6 +38,7 @@ const SignIn = () => {
         .then((callback) => {
             if (callback.error) {
                 console.log(callback.error);
+
                 return;
             }
             console.log(callback);
@@ -51,17 +51,6 @@ const SignIn = () => {
             console.log(error);
         });
         
-    }
-
-    if (pageLoading) {
-        return (
-            <div className="bg-neutral text-white p-6 min-h-screen">
-                <div className="flex flex-col justify-center items-center h-screen">
-                    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white mb-2"></div>
-                    <p>Getting login form</p>
-                </div>
-            </div>
-        );
     }
 
     return (
