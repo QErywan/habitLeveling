@@ -23,6 +23,34 @@ const DashboardHabit = ({ userData }) => {
         );
     }
 
+    const handleDeleteHabit = async (habitId) => {
+        // Update local state immediately
+        setHabits(prevHabits => 
+            prevHabits.filter(habit => habit._id !== habitId)
+        );
+    
+        // API call
+        const response = await fetch("/api/deleteHabit", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ habitId }),
+        });
+
+        if (response.status == '429') {
+            showToast("Too many requests.!");
+        }
+    
+        if (!response.ok) {
+            console.log("Error deleting habit");
+            // Revert the state if API call fails
+            setHabits(prevHabits => 
+                prevHabits.filter(habit => habit._id !== habitId)
+            );
+        }
+    }
+
 
 
     const handleCompleteHabit = async (habitId, isChecked) => {
@@ -133,6 +161,14 @@ return (
                                 {/* Habit List */}
                                 {habits && habits.length > 0 ? ((habits.map((habit) => (
                                     <div className="flex flex-row card bg-base-200 px-2 h-20 border border-white" key={habit._id}>
+                                        <div className="relative">
+                                            <button
+                                                onClick={() => handleDeleteHabit(habit._id)}
+                                                className="absolute top-0 right-0 h-5 w-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center"
+                                            >
+                                                x
+                                            </button>
+                                        </div>
                                         <label className="flex items-center justify-between h-full w-full">
                                             <span className="ml-2">{habit.Name}</span>
                                             <input
@@ -186,6 +222,14 @@ return (
                                     {/* Habit List */}
                                     {habits && habits.length > 0 ? ((habits.map((habit) => (
                                         <div className="flex flex-row card bg-base-200 border border-white px-2 h-20" key={habit._id}>
+                                            <div className="relative">
+                                                <button
+                                                    onClick={() => handleDeleteHabit(habit._id)}
+                                                    className="absolute top-0 right-0 h-5 w-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center"
+                                                >
+                                                    x
+                                                </button>
+                                            </div>
                                             <label className="flex items-center justify-between w-full">
                                                 <span className="ml-2">{habit.Name}</span>
                                                 <input
@@ -230,6 +274,7 @@ return (
             />
         </div>
     );
+
 }
 
 export default DashboardHabit;
