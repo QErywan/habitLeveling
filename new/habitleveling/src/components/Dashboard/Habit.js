@@ -86,6 +86,16 @@ const DashboardHabit = ({ userData }) => {
         }
     }
 
+    const toggleDropdown = (id) => {
+        setHabits((prevHabits) =>
+            prevHabits.map((habit) =>
+                habit._id === id
+                    ? { ...habit, showDropdown: !habit.showDropdown }
+                    : { ...habit, showDropdown: false }
+            )
+        );
+    };
+
     function showToast(message) {
         toast(message);
     }
@@ -161,13 +171,27 @@ return (
                                 {/* Habit List */}
                                 {habits && habits.length > 0 ? ((habits.map((habit) => (
                                     <div className="flex flex-row card bg-base-200 px-2 h-20 border border-white" key={habit._id}>
-                                        <div className="relative">
+                                        <div className="flex">
                                             <button
-                                                onClick={() => handleDeleteHabit(habit._id)}
-                                                className="absolute top-0 right-0 h-5 w-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center"
+                                                className="text-gray-500 hover:text-gray-700 focus:outline-none text-xl w-5"
+                                                onClick={() => toggleDropdown(habit._id)}
                                             >
-                                                x
+                                                &#x22EE;
                                             </button>
+                                            {/* Dropdown Menu */}
+                                            {habit.showDropdown && (
+                                                <div className="absolute left-0 top-12 mt-2 w-40 bg-white border rounded shadow-lg z-10">
+                                                    <ul>
+                                                        <li
+                                                            className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-black"
+                                                            onClick={() => handleDeleteHabit(habit._id)}
+                                                        >
+                                                            Delete Habit
+                                                        </li>
+                                                        {/* Add more options here if needed */}
+                                                    </ul>
+                                                </div>
+                                            )}
                                         </div>
                                         <label className="flex items-center justify-between h-full w-full">
                                             <span className="ml-2">{habit.Name}</span>
@@ -222,13 +246,27 @@ return (
                                     {/* Habit List */}
                                     {habits && habits.length > 0 ? ((habits.map((habit) => (
                                         <div className="flex flex-row card bg-base-200 border border-white px-2 h-20" key={habit._id}>
-                                            <div className="relative">
+                                            <div className="flex text-xl">
                                                 <button
-                                                    onClick={() => handleDeleteHabit(habit._id)}
-                                                    className="absolute top-0 right-0 h-5 w-5 bg-red-500 rounded-full text-white text-xs flex items-center justify-center"
+                                                    className="text-gray-500 hover:text-gray-700 focus:outline-none w-5"
+                                                    onClick={() => toggleDropdown(habit._id)}
                                                 >
-                                                    x
+                                                    &#x22EE;
                                                 </button>
+                                                {/* Dropdown Menu */}
+                                                {habit.showDropdown && (
+                                                    <div className="absolute left-0 top-12 mt-2 w-40 bg-white border rounded shadow-lg z-10">
+                                                        <ul>
+                                                            <li
+                                                                className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-black"
+                                                                onClick={() => deleteHabit(habit._id)}
+                                                            >
+                                                                Delete Habit
+                                                            </li>
+                                                            {/* Add more options here if needed */}
+                                                        </ul>
+                                                    </div>
+                                                )}
                                             </div>
                                             <label className="flex items-center justify-between w-full">
                                                 <span className="ml-2">{habit.Name}</span>
