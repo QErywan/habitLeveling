@@ -259,7 +259,7 @@ return (
                                                         <ul>
                                                             <li
                                                                 className="px-4 py-2 hover:bg-gray-200 cursor-pointer text-black"
-                                                                onClick={() => deleteHabit(habit._id)}
+                                                                onClick={() => handleDeleteHabit(habit._id)}
                                                             >
                                                                 Delete Habit
                                                             </li>

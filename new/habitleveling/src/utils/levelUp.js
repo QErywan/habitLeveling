@@ -21,7 +21,7 @@ export async function levelUpIfNeeded(userId) {
                 $set: {
                     Experience: currExp - expToNextLevel,
                     Level: currLevel + 1,
-                    Points: currPoints + 1,
+                    Points: currPoints + 3,
                 },
             }
         );

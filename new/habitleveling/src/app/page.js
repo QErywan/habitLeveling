@@ -1,9 +1,13 @@
-import Image from "next/image";
+
 
 export default function Home() {
   return (
-    <main>
-      <h1>Test</h1>
-    </main>
+    <>
+    <div className="bg-base-100">
+      <button className="m-5 p-3 rounded-lg bg-neutral">
+        <a href="/signin">Sign In</a>
+      </button>
+    </div>
+    </>
   );
 }
