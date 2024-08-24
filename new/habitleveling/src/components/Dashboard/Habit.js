@@ -1,4 +1,4 @@
-
+"use client"
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -279,7 +279,7 @@ return (
                                             </label>
                                         </div>
                                     ))) ) : (
-                                        <p>Add habit with the button above!</p>
+                                        <p>Add habit with the button below!</p>
                                     )}
                                 </div>
                             </div>
