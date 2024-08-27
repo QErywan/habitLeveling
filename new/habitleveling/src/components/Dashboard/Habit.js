@@ -166,7 +166,7 @@ return (
 
 
                             {/* Content */}
-                            <div className="grid grid-cols-2 gap-5 overflow-auto px-5 py-2">
+                            <div className="grid grid-cols-2 gap-5 overflow-y-scroll px-5 py-2">
 
                                 {/* Habit List */}
                                 {habits && habits.length > 0 ? ((habits.map((habit) => (
@@ -241,7 +241,7 @@ return (
                             {/* Content */}
                             <div className='flex flex-col gap-3 flex-initial w-full'>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 overflow-auto px-5 py-2 max-h-[25rem] w-full">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 overflow-y-scroll px-5 py-2 max-h-[25rem] w-full">
 
                                     {/* Habit List */}
                                     {habits && habits.length > 0 ? ((habits.map((habit) => (
