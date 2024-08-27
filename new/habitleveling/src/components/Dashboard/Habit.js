@@ -1,90 +1,130 @@
-"use client"
+"use client";
+
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 import { Bounce, ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import DashboardSkeleton from "./HabitSkeleton";
 
-const DashboardHabit = ({ userData }) => {
+const DashboardHabit = () => {
     const router = useRouter();
-    const [habits, setHabits] = useState(userData.HabitList);
+    const { data: session, status } = useSession();
+    const [userData, setUserData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [habits, setHabits] = useState([]);
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await fetch("/api/getUserData");
+                if (response.ok) {
+                    const data = await response.json();
+                    setUserData(data);
+                    setHabits(data.HabitList);
 
+                    if (!data.hasAccess && !data.freeTrial) {
+                        router.push("/pricing");
+                    }
+                    localStorage.setItem("userData", JSON.stringify(data));
+                } else if (response.status === 429) {
+                    handleRateLimit();
+                } else {
+                    throw new Error(`Failed to fetch user data: ${response.statusText}`);
+                }
+            } catch (error) {
+                handleFetchError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    if (!userData) {
-        return (
-            <div className="bg-blue-950 text-white p-6 min-h-screen">
-                <div className="flex justify-center items-center h-screen">
-                    <div className="animate-spin rounded-full h-20 w-20 border-t-2 border-b-2 border-white"></div>
-                    <p>Loading user data...</p>
-                </div>
-            </div>
-        );
-    }
+        const handleRateLimit = () => {
+            toast.error("Too many requests. Using cached data.");
+            const cachedUserData = localStorage.getItem("userData");
+            if (cachedUserData) {
+                const parsedData = JSON.parse(cachedUserData);
+                setUserData(parsedData);
+                setHabits(parsedData.HabitList);
+            } else {
+                toast.error("No cached data available.");
+            }
+        };
+
+        const handleFetchError = (error) => {
+            toast.error(`Error fetching user data: ${error.message}`);
+            const cachedUserData = localStorage.getItem("userData");
+            if (cachedUserData) {
+                const parsedData = JSON.parse(cachedUserData);
+                setUserData(parsedData);
+                setHabits(parsedData.HabitList);
+            } else {
+                toast.error("No cached data available.");
+            }
+        };
+
+        if (status === "authenticated") {
+            fetchUserData();
+        } else if (status === "unauthenticated") {
+            router.push("/signin");
+        }
+    }, [status, router]);
 
     const handleDeleteHabit = async (habitId) => {
-        // Update local state immediately
-        setHabits(prevHabits => 
-            prevHabits.filter(habit => habit._id !== habitId)
-        );
-    
-        // API call
-        const response = await fetch("/api/deleteHabit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ habitId }),
-        });
+        const updatedHabits = habits.filter((habit) => habit._id !== habitId);
+        setHabits(updatedHabits);
 
-        if (response.status == '429') {
-            showToast("Too many requests.!");
+        try {
+            const response = await fetch("/api/deleteHabit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ habitId }),
+            });
+
+            if (response.status === 429) {
+                toast.error("Too many requests.");
+            } else if (!response.ok) {
+                throw new Error("Failed to delete habit");
+            }
+        } catch (error) {
+            console.log(error.message);
+            setHabits((prevHabits) => [...prevHabits, ...updatedHabits]);
         }
-    
-        if (!response.ok) {
-            console.log("Error deleting habit");
-            // Revert the state if API call fails
-            setHabits(prevHabits => 
-                prevHabits.filter(habit => habit._id !== habitId)
-            );
-        }
-    }
-
-
+    };
 
     const handleCompleteHabit = async (habitId, isChecked) => {
-        // Update local state immediately
-        setHabits(prevHabits => 
-            prevHabits.map(habit => 
-                habit._id === habitId ? { ...habit, CompletedToday: isChecked } : habit
-            )
+        const updatedHabits = habits.map((habit) =>
+            habit._id === habitId ? { ...habit, CompletedToday: isChecked } : habit
         );
-    
-        // API call
-        const response = await fetch("/api/completeHabit", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ habitId, status: isChecked }),
-        });
+        setHabits(updatedHabits);
 
-        if (response.status == '429') {
-            showToast("Too many requests.!");
-        }
+        try {
+            const response = await fetch("/api/completeHabit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ habitId, status: isChecked }),
+            });
 
-    
-        if (!response.ok) {
-            console.log("Error completing habit");
-            // Revert the state if API call fails
-            setHabits(prevHabits => 
-                prevHabits.map(habit => 
+            if (response.status === 429) {
+                toast.error("Too many requests.");
+            } else if (!response.ok) {
+                throw new Error("Failed to update habit");
+            }
+        } catch (error) {
+            console.log(error.message);
+            setHabits((prevHabits) =>
+                prevHabits.map((habit) =>
                     habit._id === habitId ? { ...habit, CompletedToday: !isChecked } : habit
                 )
             );
         }
-    }
+    };
 
     const toggleDropdown = (id) => {
         setHabits((prevHabits) =>
@@ -96,16 +136,9 @@ const DashboardHabit = ({ userData }) => {
         );
     };
 
-    function showToast(message) {
-        toast(message);
-    }
-
     const addHabit = () => {
-        console.log('Add Habit');
-
-        router.push('/newHabit');
-
-    }
+        router.push("/newHabit");
+    };
 
     const handleItemClick = (item) => async () => {
         switch (item) {
@@ -119,12 +152,16 @@ const DashboardHabit = ({ userData }) => {
                 router.push("/dashboard/quest");
                 break;
             case "logout":
-                await signOut({ callbackUrl: '/' });
+                await signOut({ callbackUrl: "/" });
                 break;
             default:
                 console.log("default");
                 break;
         }
+    };
+
+    if (loading || !userData) {
+        <DashboardSkeleton />
     }
 
 return (
