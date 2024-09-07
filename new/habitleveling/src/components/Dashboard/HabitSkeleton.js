@@ -1,7 +1,7 @@
 // components/DashboardSkeleton.js
 const DashboardSkeleton = () => {
     return (
-        <div className="bg-base-100 text-white p-6 min-h-screen">
+        <div className="bg-base-100 text-white p-6 min-h-screen animate-pulse">
             {/* Skeleton structure */}
             <div className="hidden lg:flex">
                 <div className="lg:w-44 card lg:justify-center lg:px-4 lg:static">
@@ -21,7 +21,7 @@ const DashboardSkeleton = () => {
                         <div className="grid grid-cols-2 gap-5 overflow-y-scroll px-5 py-2">
                             {[...Array(4)].map((_, i) => (
                                 <div key={i} className="bg-base-200 px-2 h-20 border border-white flex items-center justify-between">
-                                    <div className="bg-gray-700 h-8 w-3/4 rounded">fdinvsdnvoidnv</div>
+                                    <div className="bg-gray-700 h-8 w-3/4 rounded"></div>
                                     <div className="bg-gray-700 h-8 w-8 rounded"></div>
                                 </div>
                             ))}

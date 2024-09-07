@@ -37,7 +37,7 @@ const DashboardStatus = () => {
             const cachedUserData = localStorage.getItem("userData");
             if (cachedUserData) {
               setUserData(JSON.parse(cachedUserData));
-              setStats(JSON.parse(cachedUserData).stats[0]);
+              setStats(JSON.parse(cachedUserData).Stats[0]);
               setAvailablePoints(JSON.parse(cachedUserData).Points);
             } else {
               setRateLimited(true);

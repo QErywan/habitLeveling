@@ -22,8 +22,12 @@ const DashboardHabit = () => {
                 const response = await fetch("/api/getUserData");
                 if (response.ok) {
                     const data = await response.json();
-                    setUserData(data);
-                    setHabits(data.HabitList);
+                    if (data) {
+                        setUserData(data);
+                        setHabits(data.HabitList);
+                    } else {
+                        router.push("/create");
+                    }
 
                     if (!data.hasAccess && !data.freeTrial) {
                         router.push("/pricing");

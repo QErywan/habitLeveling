@@ -28,7 +28,6 @@ const SignIn = () => {
     const loginUserCredentials = async (e) => {
         e.preventDefault();
 
-        setIsLoading(true);
 
         const response = await signIn('credentials', {
             redirect: false,
@@ -117,7 +116,7 @@ const SignIn = () => {
                         type="submit"
                         className="w-full px-3 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none"
                     >
-                        {loading ? <Loader /> : 'Sign In'}
+                        Sign In
                     </button>
                     <div className="mt-4 text-center">
                         <Link href="/auth/forgot-password" className='text-sm text-blue-500'>
