@@ -67,7 +67,7 @@ const SignIn = () => {
                         Sign In with Google
                     </button>
                 </div>
-                {/* <form onSubmit={loginUserCredentials} className="mt-4">
+                <form onSubmit={loginUserCredentials} className="mt-4">
                     <div className="mb-4">
                         <label htmlFor="email" className="block text-sm font-medium text-neutral-content">Email</label>
                         <input
@@ -129,7 +129,7 @@ const SignIn = () => {
                             <Link href="/signup" className="text-blue-500">Sign Up</Link>
                         </p>
                     </div>
-                </form> */}
+                </form>
             </div>
         </div>
     );
