@@ -1,2 +1,3 @@
 # habitLeveling
-A habit tracker inspired by solo leveling!
+
+A Gamiffied Habit Tracker
